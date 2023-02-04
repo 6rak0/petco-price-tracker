@@ -30,6 +30,4 @@ async function notification() {
     sendMessage(chatId, `${product} está en ${price}`)
 }
 
-cron.schedule('0 9,21 * * *', () => {
-    notification
-})
+cron.schedule('0 9 * * *', () => notification())
