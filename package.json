@@ -1,10 +1,11 @@
 {
   "name": "petco",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
@@ -15,5 +16,6 @@
     "dotenv": "^16.0.3",
     "node-cron": "^3.0.2",
     "node-telegram-bot-api": "^0.61.0"
-  }
+  },
+  "type": "module"
 }
