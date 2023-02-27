@@ -95,7 +95,7 @@ const notification = async (url) => {
     await sendMessage(chatId, `${product} está en ${price}`);
 };
 
-cron.schedule('55 13 * * *',async () => {
+cron.schedule('0 9 * * *',async () => {
     const products = await getItems()
     products.forEach(product => {
         notification(product);
