@@ -3,42 +3,15 @@ import cron from 'node-cron';
 import {load} from 'cheerio';
 import axios from 'axios';
 import TelegramBot from 'node-telegram-bot-api';
-import Pocketbase from 'pocketbase'
+import { getItems } from "./lib/utils.js"
 
 dotenv.config();
 const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN, {polling: true});
 const chatId = process.env.CHAT_ID;
-const pb = new Pocketbase(process.env.POCKETBASE_URL)
 
-const getItems = async () => {
-    const items = await pb.collection('petco_items').getFullList({
-        sort: '-created',
-    }); 
-    return items
-}
-
-const addItem = async (url) => {
-    try {
-        await pb.collection('petco_items').create({url})
-        console.log('✅ item added')
-    } catch (error) {
-        console.error(error)
-    }
-}
-
-const removeItem = async (url) => {
-    const items = await getItems()
-    items.forEach(async item => {
-        if (url === item.url){
-            try {
-                await pb.collection('petco_items').delete(item.id)
-                console.log('💣 item removed')
-            } catch (error) {
-                console.error(error)
-            }
-        }
-    })
-}
+bot.onText(/hola?/, async (msg, match) => {
+    bot.sendMessage(msg.chat.id, 'hola amigo')
+})
 
 // add
 bot.onText(/\/add https?:\/\/(?:www\.)?petco\.com\.mx(?:\/.*)/,async (msg, match) => {
